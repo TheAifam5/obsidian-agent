@@ -18,7 +18,8 @@
     "test": "jest --testPathIgnorePatterns=src/integration_tests/",
     "test:integration": "jest src/integration_tests/",
     "prepare": "husky",
-    "prompt:debug": "bun scripts/printPromptDebug.js"
+    "prompt:debug": "bun scripts/printPromptDebug.js",
+    "link:dev": "bun scripts/link-dev.ts"
   },
   "keywords": [],
   "author": "Logan Yang",

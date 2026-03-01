@@ -51,6 +51,15 @@ describe("sanitizeQaExclusions", () => {
       encodeURIComponent(COPILOT_FOLDER_ROOT),
     ]);
   });
+
+  it("migrates old 'copilot' exclusion to .copilot", () => {
+    const rawValue = `${encodeURIComponent("copilot")},${encodeURIComponent("my-folder")}`;
+    const sanitized = sanitizeQaExclusions(rawValue);
+    expect(sanitized.split(",")).toEqual([
+      encodeURIComponent(COPILOT_FOLDER_ROOT),
+      encodeURIComponent("my-folder"),
+    ]);
+  });
 });
 
 describe("sanitizeSettings - defaultSendShortcut migration", () => {

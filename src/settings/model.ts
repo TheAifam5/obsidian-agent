@@ -236,7 +236,7 @@ export function sanitizeQaExclusions(rawValue: unknown): string {
   decodedPatterns.forEach((pattern) => {
     const canonical = pattern.replace(/\/+$/, "");
     const canonicalKey = canonical.length > 0 ? canonical : pattern;
-    if (canonicalKey === COPILOT_FOLDER_ROOT) {
+    if (canonicalKey === COPILOT_FOLDER_ROOT || canonicalKey === "copilot") {
       canonicalToOriginalPattern.set(COPILOT_FOLDER_ROOT, COPILOT_FOLDER_ROOT);
       return;
     }
@@ -520,6 +520,19 @@ export function sanitizeSettings(settings: CopilotSettings): CopilotSettings {
     sanitizedSettings.defaultSendShortcut = DEFAULT_SETTINGS.defaultSendShortcut;
   }
 
+  // Migration: rename copilot/ folder prefix to .copilot/ (v3.3.0+)
+  const migrateFolderPrefix = (folder: string): string =>
+    folder === "copilot" || folder.startsWith("copilot/")
+      ? `.copilot${folder.slice("copilot".length)}`
+      : folder;
+  sanitizedSettings.defaultSaveFolder = migrateFolderPrefix(sanitizedSettings.defaultSaveFolder);
+  sanitizedSettings.customPromptsFolder = migrateFolderPrefix(
+    sanitizedSettings.customPromptsFolder,
+  );
+  sanitizedSettings.memoryFolderName = migrateFolderPrefix(sanitizedSettings.memoryFolderName);
+  sanitizedSettings.userSystemPromptsFolder = migrateFolderPrefix(
+    sanitizedSettings.userSystemPromptsFolder,
+  );
   // Ensure folder settings fall back to defaults when empty/whitespace
   const saveFolder = (settingsToSanitize.defaultSaveFolder || "").trim();
   sanitizedSettings.defaultSaveFolder =
