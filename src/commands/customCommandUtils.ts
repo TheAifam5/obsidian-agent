@@ -11,6 +11,7 @@ import {
 } from "@/commands/constants";
 import { CustomCommand } from "@/commands/type";
 import {
+  DEFAULT_SETTINGS,
   NOTE_CONTEXT_PROMPT_TAG,
   SELECTED_TEXT_TAG,
   VARIABLE_NOTE_TAG,
@@ -359,7 +360,7 @@ export async function processPrompt(
   activeNote?: TFile | null,
   skipEmptyBraces: boolean = false,
 ): Promise<ProcessedPromptResult> {
-  const settings = getSettings();
+  const settings = getSettings() ?? DEFAULT_SETTINGS;
   const includedFiles = new Set<TFile>();
 
   if (!settings.enableCustomPromptTemplating) {

@@ -163,7 +163,7 @@ export function isPendingFileWrite(path: string): boolean {
  * @returns The default prompt title (empty string means no custom prompt)
  */
 export function getDefaultSystemPromptTitle(): string {
-  return getSettings().defaultSystemPromptTitle;
+  return getSettings()?.defaultSystemPromptTitle ?? "";
 }
 
 /**

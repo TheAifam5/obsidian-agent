@@ -13,9 +13,8 @@ export class MemoryManager {
   private readonly candidateLimit: number;
 
   constructor() {
-    const settings = getSettings();
     // Convert MB to bytes, with bounds checking
-    const ramLimitMB = Math.min(1000, Math.max(20, settings.lexicalSearchRamLimit || 100));
+    const ramLimitMB = Math.min(1000, Math.max(20, getSettings()?.lexicalSearchRamLimit ?? 100));
     this.maxBytes = ramLimitMB * MemoryManager.MB_TO_BYTES;
 
     // Keep a reasonable candidate limit based on RAM available

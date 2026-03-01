@@ -1,8 +1,8 @@
-import { getSettings } from "@/settings/model";
 import { logFileManager } from "@/logFileManager";
+import { getSettings } from "@/settings/model";
 
 export function logInfo(...args: any[]) {
-  if (getSettings().debug) {
+  if (getSettings()?.debug) {
     console.log(...args);
   }
   // Always append to rolling file log
@@ -11,14 +11,14 @@ export function logInfo(...args: any[]) {
 
 export function logError(...args: any[]) {
   // Always include stack traces by default; console logs still respect debug
-  if (getSettings().debug) {
+  if (getSettings()?.debug) {
     console.error(...args);
   }
   void logFileManager.append("ERROR", ...args);
 }
 
 export function logWarn(...args: any[]) {
-  if (getSettings().debug) {
+  if (getSettings()?.debug) {
     console.warn(...args);
   }
   void logFileManager.append("WARN", ...args);
@@ -37,7 +37,7 @@ export function logMarkdownBlock(lines: string[]): void {
  * Falls back to INFO log when console.table is unavailable.
  */
 export function logTable(rows: Array<Record<string, unknown>>, columns?: string[]): void {
-  if (getSettings().debug) {
+  if (getSettings()?.debug) {
     try {
       // @ts-ignore - console.table exists in Chromium runtime
       if (typeof console.table === "function") {
