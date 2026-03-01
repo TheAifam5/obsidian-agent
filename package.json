@@ -23,6 +23,7 @@
   },
   "keywords": [],
   "author": "Logan Yang",
+  "contributors": ["can1357 <me@can.ac>"],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

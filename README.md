@@ -16,12 +16,8 @@ The Ultimate AI Assistant for Your Second Brain
   <a href="https://github.com/logancyang/obsidian-copilot/issues/new?template=feature_request.md">Request Feature</a>
 </p>
 
-<p align="center">
-  <a href="https://example.com](https://obsidian.md/blog/2024-goty-winners/">
-    <img src="./images/reward-banner.svg" alt="Reward Banner" width="400"/>
-  </a>
-</p>
-
+> **Fork notice:** This is an unofficial fork of [Copilot for Obsidian](https://github.com/logancyang/obsidian-copilot) by [Logan Yang](https://github.com/logancyang), maintained by [can1357](https://github.com/can1357). It removes the Copilot Plus cloud service layer and tiered feature gates, keeping everything local and open. The original plugin remains the upstream reference for core functionality.
+>
 ## The What
 
 _Copilot for Obsidian_ is your in‑vault AI assistant with chat-based vault search, web and YouTube support, powerful context processing, and ever-expanding agentic capabilities within Obsidian's highly customizable workspace - all while keeping your data under **your** control.
@@ -326,7 +322,3 @@ Special thanks to our top sponsors: @mikelaaron, @pedramamini, @Arlorean, @dashi
 Your messages and notes are sent only to your configured LLM provider (OpenAI, Anthropic, Google, etc.).
 
 The frontend code of Copilot plugin is fully open-source.
-
-## **Authors**
-
-X/Twitter: [@logancyang](https://twitter.com/logancyang)
