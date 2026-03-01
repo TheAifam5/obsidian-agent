@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Integration tests
         # Only run integration tests for trusted events when API key secret is available
-        if: ${{ (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && secrets.GOOGLE_API_KEY != '' }}
+        if: ${{ (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && env.GEMINI_API_KEY != '' }}
         env:
           GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: bun run test:integration
