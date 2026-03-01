@@ -15,6 +15,7 @@ import { getCachedCustomCommands } from "@/commands/state";
 import { CustomCommand } from "@/commands/type";
 import { ApplyCustomCommandModal } from "@/components/modals/ApplyCustomCommandModal";
 import { YoutubeTranscriptModal } from "@/components/modals/YoutubeTranscriptModal";
+import { COPILOT_FOLDER_ROOT } from "@/constants";
 import {
   clearRecordedPromptPayload,
   flushRecordedPromptPayloadToLog,
@@ -313,7 +314,7 @@ export function registerCommands(
 
       // Create or update the file in the vault
       const fileName = `Copilot-Indexed-Files-${new Date().toLocaleDateString().replace(/\//g, "-")}.md`;
-      const folderPath = "copilot";
+      const folderPath = COPILOT_FOLDER_ROOT;
       const filePath = `${folderPath}/${fileName}`;
 
       // Ensure destination folder exists (supports mobile and nested)
@@ -386,7 +387,7 @@ export function registerCommands(
 
       // Create the debug file
       const fileName = `Copilot-Embedding-Debug-${activeFile.basename.replace(/[\\/:*?"<>|]/g, "_")}.md`;
-      const folderPath = "copilot";
+      const folderPath = COPILOT_FOLDER_ROOT;
       const filePath = `${folderPath}/${fileName}`;
 
       await ensureFolderExists(folderPath);

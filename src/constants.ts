@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
 import { CustomModel } from "@/aiParams";
 import { type CopilotSettings } from "@/settings/model";
-import { v4 as uuidv4 } from "uuid";
 import { ChainType } from "./chainFactory";
 import { PromptSortStrategy } from "./types";
 
@@ -9,7 +9,7 @@ export const USER_SENDER = "user";
 export const AI_SENDER = "ai";
 
 // Default folder names
-export const COPILOT_FOLDER_ROOT = "copilot";
+export const COPILOT_FOLDER_ROOT = ".copilot";
 export const DEFAULT_CHAT_HISTORY_FOLDER = `${COPILOT_FOLDER_ROOT}/copilot-conversations`;
 export const DEFAULT_CUSTOM_PROMPTS_FOLDER = `${COPILOT_FOLDER_ROOT}/copilot-custom-prompts`;
 export const DEFAULT_MEMORY_FOLDER = `${COPILOT_FOLDER_ROOT}/memory`;

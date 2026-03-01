@@ -311,7 +311,7 @@ export const formatDateTime = (
  * Works across desktop and mobile. Safe to call repeatedly.
  *
  * Examples:
- * - ensureFolderExists("copilot/copilot-conversations")
+ * - ensureFolderExists(".copilot/copilot-conversations")
  * - ensureFolderExists("some/deep/nested/path")
  *
  * Throws if any segment conflicts with an existing file.
