@@ -74,10 +74,10 @@ Read the [Changelog](https://github.com/can1357/obsidian-agent/releases/tag/3.0.
 
 ### Install Obsidian Copilot
 
-1. Open **Obsidian → Settings → Community plugins**.
-2. Turn off **Safe mode** (if enabled).
-3. Click **Browse**, search for **“Copilot for Obsidian”**.
-4. Click **Install**, then **Enable**.
+1. Download the latest release from this repository's **Releases** page.
+2. Extract the files into your vault's `.obsidian/plugins/copilot/` directory.
+3. Restart Obsidian.
+4. Go to **Settings → Community plugins**, find **Copilot**, and click **Enable**.
 
 ### Set API Keys
 
