@@ -5,15 +5,13 @@ The Ultimate AI Assistant for Your Second Brain
 </h2>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/logancyang/obsidian-copilot?style=for-the-badge&sort=semver" alt="GitHub release (latest SemVer)">
-  <img src="https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22copilot%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json&style=for-the-badge" alt="Obsidian Downloads">
+  <img src="https://img.shields.io/github/v/release/can1357/obsidian-agent?style=for-the-badge&sort=semver" alt="GitHub release (latest SemVer)">
 </p>
 
 <p align="center">
-  <a href="https://www.obsidiancopilot.com/en/docs">Documentation</a> |
-  <a href="https://www.youtube.com/@loganhallucinates">Youtube</a> |
-  <a href="https://github.com/logancyang/obsidian-copilot/issues/new?template=bug_report.md">Report Bug</a> |
-  <a href="https://github.com/logancyang/obsidian-copilot/issues/new?template=feature_request.md">Request Feature</a>
+  <a href="https://github.com/can1357/obsidian-agent">GitHub</a> |
+  <a href="https://github.com/can1357/obsidian-agent/issues/new?template=bug_report.md">Report Bug</a> |
+  <a href="https://github.com/can1357/obsidian-agent/issues/new?template=feature_request.md">Request Feature</a>
 </p>
 
 > **Fork notice:** This is an unofficial fork of [Copilot for Obsidian](https://github.com/logancyang/obsidian-copilot) by [Logan Yang](https://github.com/logancyang), maintained by [can1357](https://github.com/can1357). It removes the Copilot Plus cloud service layer and tiered feature gates, keeping everything local and open. The original plugin remains the upstream reference for core functionality.
@@ -64,7 +62,7 @@ After months of hard work, we have revamped the codebase and adopted a new parad
 - FOR FREE USERS: Image support and chat context menu are available to all users starting from v3.0.0!
 - FOR PLUS USERS: **Autonomous agent** is available with vault search, web search, youtube, composer and soon a lot other tools! **Long-term memory** is also a tool the agent can use by itself starting from 3.1.0!
 
-Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag/3.0.0).
+Read the [Changelog](https://github.com/can1357/obsidian-agent/releases/tag/3.0.0).
 
 ## Why People Love It ❤️
 
@@ -242,22 +240,21 @@ In agent mode, ask Copilot
 
 ## **Need Help?**
 
-- Check the [documentation](https://www.obsidiancopilot.com/en/docs) for setup guides, how-tos, and advanced features.
-- Watch [Youtube](https://www.youtube.com/@loganhallucinates) for walkthroughs.
+- Check the [GitHub repository](https://github.com/can1357/obsidian-agent) for documentation and setup guides.
 - If you're experiencing a bug or have a feature idea, please follow the steps below to help us help you faster:
   - 🐛 Bug Report Checklist
-    - ☑️Use the [bug report template](https://github.com/logancyang/obsidian-copilot/issues/new?template=bug_report.md) when reporting an issue
+    - ☑️Use the [bug report template](https://github.com/can1357/obsidian-agent/issues/new?template=bug_report.md) when reporting an issue
     - ☑️Enable Debug Mode in Copilot Settings → Advanced for more detailed logs
     - ☑️Open the dev console to collect error messages:
       - Mac: Cmd + Option + I
       - Windows: Ctrl + Shift + I
     - ☑️Turn off all other plugins, keeping only Copilot enabled
     - ☑️Attach relevant console logs to your report
-    - ☑️Submit your bug report [here](https://github.com/logancyang/obsidian-copilot/issues/new?template=bug_report.md)
+    - ☑️Submit your bug report [here](https://github.com/can1357/obsidian-agent/issues/new?template=bug_report.md)
   - 💡 Feature Request Checklist
-    - ☑️Use the [feature request template](https://github.com/logancyang/obsidian-copilot/issues/new?template=feature_request.md) for requesting a new feature
+    - ☑️Use the [feature request template](https://github.com/can1357/obsidian-agent/issues/new?template=feature_request.md) for requesting a new feature
     - ☑️Clearly describe the feature, why it matters, and how it would help
-    - ☑️Submit your feature request [here](https://github.com/logancyang/obsidian-copilot/issues/new?template=feature_request.md)
+    - ☑️Submit your feature request [here](https://github.com/can1357/obsidian-agent/issues/new?template=feature_request.md)
 
 ## **FAQ**
 
@@ -304,18 +301,6 @@ Please refer to your model provider’s documentation for the context window siz
 💡 For QA with unlimited context, switch to the <strong>Vault QA</strong> mode in the dropdown (Copilot v2.1.0+ required).
 
 </details>
-
-## **🙏 Thank You**
-
-If you share the vision of building the most powerful AI agent for our second brain, consider [sponsoring this project](https://github.com/sponsors/logancyang) or buying me a coffee. Help spread the word by sharing Copilot for Obsidian on Twitter/X, Reddit, or your favorite platform!
-
-<p align="center">
-  <img src="https://camo.githubusercontent.com/7b8f7343bfc6e3c65c7901846637b603fd812f1a5f768d8b0572558bde859eb9/68747470733a2f2f63646e2e6275796d6561636f666665652e636f6d2f627574746f6e732f76322f64656661756c742d79656c6c6f772e706e67" alt="BuyMeACoffee" width="200">
-</p>
-
-**Acknowledgments**
-
-Special thanks to our top sponsors: @mikelaaron, @pedramamini, @Arlorean, @dashinja, @azagore, @MTGMAD, @gpythomas, @emaynard, @scmarinelli, @borthwick, @adamhill, @gluecode, @rusi, @timgrote, @JiaruiYu-Consilium, @ddocta, @AMOz1, @chchwy, @pborenstein, @GitTom, @kazukgw, @mjluser1, @joesfer, @rwaal, @turnoutnow-harpreet, @dreznicek, @xrise-informatik, @jeremygentles, @ZhengRui, @bfoujols, @jsmith0475, @pagiaddlemon, @sebbyyyywebbyyy, @royschwartz2, @vikram11, @amiable-dev, @khalidhalim, @DrJsPBs, @chishaku, @Andrea18500, @shayonpal, @rhm2k, @snorcup, @JohnBub, @obstinatelark, @jonashaefele, @vishnu2kmohan
 
 ## **Privacy**
 

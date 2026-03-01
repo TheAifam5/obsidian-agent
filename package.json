@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-copilot",
+  "name": "@can1357/obsidian-agent",
   "version": "3.2.3",
   "description": "Your AI Copilot: Chat with Your Second Brain, Learn Faster, Work Smarter.",
   "main": "main.js",

@@ -261,7 +261,7 @@ export function LocalServicesSection() {
         <div className="tw-mt-1 tw-text-xs tw-text-muted">
           Need help?{" "}
           <a
-            href="https://github.com/logancyang/obsidian-copilot/blob/master/local_copilot.md"
+            href="https://github.com/can1357/obsidian-agent/blob/master/local_copilot.md"
             target="_blank"
             rel="noopener noreferrer"
             className="tw-text-accent hover:tw-text-accent-hover"
