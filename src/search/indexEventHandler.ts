@@ -1,5 +1,3 @@
-import { getChainType } from "@/aiParams";
-import { ChainType } from "@/chainFactory";
 import { logInfo } from "@/logger";
 import { getSettings, subscribeToSettingsChange } from "@/settings/model";
 import { App, MarkdownView, Platform, TAbstractFile, TFile } from "obsidian";
@@ -41,7 +39,7 @@ export class IndexEventHandler {
   private syncEventListeners(): void {
     const shouldListen = this.shouldHandleEvents();
     if (shouldListen && !this.listenersActive) {
-      logInfo("Copilot Plus: Initializing semantic index event listeners");
+      logInfo("Initializing semantic index event listeners");
       this.app.workspace.on("active-leaf-change", this.handleActiveLeafChange);
       this.app.vault.on("delete", this.handleFileDelete);
       this.listenersActive = true;
@@ -73,11 +71,6 @@ export class IndexEventHandler {
       return;
     }
     if (Platform.isMobile && getSettings().disableIndexOnMobile) {
-      return;
-    }
-
-    const currentChainType = getChainType();
-    if (currentChainType !== ChainType.COPILOT_PLUS_CHAIN) {
       return;
     }
 
@@ -124,7 +117,7 @@ export class IndexEventHandler {
 
     this.debounceTimer = window.setTimeout(() => {
       if (getSettings().debug) {
-        console.log("Copilot Plus: Triggering reindex for file ", file.path);
+        console.log("Triggering reindex for file ", file.path);
       }
       this.indexOps.reindexFile(file);
       this.debounceTimer = null;

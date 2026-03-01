@@ -10,7 +10,6 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}", "./src/styles/tailwind.css"],
   darkMode: ["class"],
   // tailwindcss-animate doesn't work with linter when using import statement.
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate"), colorOpacityPlugin, containerQueries],
   corePlugins: {
     preflight: false,

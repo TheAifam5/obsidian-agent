@@ -165,7 +165,6 @@ export function sanitizeWebTabContexts(tabs: WebTabContext[]): WebTabContext[] {
     }
 
     // Remove duplicate isActive flags
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { isActive: _unused, ...rest } = tab;
     return rest;
   });

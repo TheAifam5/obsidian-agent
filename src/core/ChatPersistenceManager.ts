@@ -647,7 +647,7 @@ ${conversationSummary}`;
             .slice(0, 10)
             .join(" ")
             // Remove invalid filename characters (including control chars)
-            // eslint-disable-next-line no-control-regex
+            // biome-ignore lint/suspicious/noControlCharactersInRegex: migrated from eslint suppression
             .replace(/[\\/:*?"<>|\x00-\x1F]/g, "")
             .trim() || "Untitled Chat"
         : "Untitled Chat";
@@ -689,11 +689,10 @@ ${conversationSummary}`;
 
     // Sanitize the final filename (replace any illegal chars with underscore)
     // Also remove leftover square brackets which are illegal on some platforms
-    // eslint-disable-next-line no-control-regex
     const sanitizedFileName = customFileName
       .replace(/\[\[([^\]]+)\]\]/g, "$1")
       .replace(/[{}[\]]/g, "_")
-      // eslint-disable-next-line no-control-regex
+      // biome-ignore lint/suspicious/noControlCharactersInRegex: migrated from eslint suppression
       .replace(/[\\/:*?"<>|\x00-\x1F]/g, "_");
 
     // Final safety check: ensure the complete basename fits within the limit

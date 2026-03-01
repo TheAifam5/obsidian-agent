@@ -213,7 +213,6 @@ export const ProjectList = memo(
             return project.UsageTimestamps;
           },
         }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps -- projectUsageRevision triggers re-sort when manager's in-memory state changes
       [
         projects,
         settings.projectListSortStrategy,

@@ -75,7 +75,6 @@ const CopilotSpinner: React.FC = () => {
             cx={cx}
             cy={cy}
             r={dotSize / 2}
-            // eslint-disable-next-line tailwindcss/no-custom-classname
             className={`copilot-spinner-dot copilot-spinner-dot-${dot.animIndex}`}
           />
         );

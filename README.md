@@ -57,8 +57,6 @@ This is the future we believe in. If you share this vision, please support this 
   - [Install Obsidian Copilot](#install-obsidian-copilot)
   - [Set API Keys](#set-api-keys)
 - [Usage](#usage)
-  - [Free User](#free-user)
-  - [Copilot Plus/Believer](#copilot-plusbeliever)
 - [Need Help?](#need-help)
 - [FAQ](#faq)
 
@@ -89,15 +87,8 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
 
 ### Set API Keys
 
-**Free User**
-
 1. Go to **Obsidian → Settings → Copilot → Basic** and click **Set Keys**.
 2. Choose your AI provider(s) (e.g., **OpenRouter, Gemini, OpenAI, Anthropic, Cohere**) and paste your API key(s). **OpenRouter is recommended.**
-
-**Copilot Plus/Believer**
-
-1. Copy your license key at your [dashboard](https://www.obsidiancopilot.com/en/dashboard). _Don’t forget to join our wonderful Discord community!_
-2. Go to **Obsidian → Settings → Copilot → Basic** and paste the key into in the **Copilot Plus** card.
 
 ## Usage
 
@@ -114,12 +105,7 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
   - [Set API Keys](#set-api-keys)
 - [Usage](#usage)
   - [Table of Contents](#table-of-contents-1)
-  - [Free User](#free-user)
-    - [**Chat Mode: reference notes and discuss ideas with Copilot**](#chat-mode-reference-notes-and-discuss-ideas-with-copilot)
-    - [**Vault QA Mode: chat with your entire vault**](#vault-qa-mode-chat-with-your-entire-vault)
-    - [Copilot's Command Palette](#copilots-command-palette)
-    - [**Relevant Notes: notes suggestions based on semantic similarity and links**](#relevant-notes-notes-suggestions-based-on-semantic-similarity-and-links)
-  - [Copilot Plus/Believer](#copilot-plusbeliever)
+  - [Features](#features)
     - [**Get Precision Insights From a Specific Time Window**](#get-precision-insights-from-a-specific-time-window)
     - [**Agent Mode: Autonomous Tool Calling**](#agent-mode-autonomous-tool-calling)
     - [**Understand Images in Your Notes**](#understand-images-in-your-notes)
@@ -127,10 +113,9 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
 - [**Need Help?**](#need-help)
 - [**FAQ**](#faq)
 - [**🙏 Thank You**](#-thank-you)
-- [**Copilot Plus Disclosure**](#copilot-plus-disclosure)
 - [**Authors**](#authors)
 
-### Free User
+### Features
 
 #### **Chat Mode: reference notes and discuss ideas with Copilot**
 
@@ -212,10 +197,6 @@ Use it to quickly reference past research, ideas, or decisions—no need to sear
 <p align="center">
     <img src="./images/Relevant-Notes.png" alt="Relevant Notes" width="700">
 </p>
-
-### Copilot Plus/Believer
-
-Copilot Plus brings powerful AI agentic capabilities, context-aware actions and seamless tool integration—built to elevate your knowledge work in Obsidian.
 
 #### **Get Precision Insights From a Specific Time Window**
 
@@ -340,21 +321,12 @@ If you share the vision of building the most powerful AI agent for our second br
 
 Special thanks to our top sponsors: @mikelaaron, @pedramamini, @Arlorean, @dashinja, @azagore, @MTGMAD, @gpythomas, @emaynard, @scmarinelli, @borthwick, @adamhill, @gluecode, @rusi, @timgrote, @JiaruiYu-Consilium, @ddocta, @AMOz1, @chchwy, @pborenstein, @GitTom, @kazukgw, @mjluser1, @joesfer, @rwaal, @turnoutnow-harpreet, @dreznicek, @xrise-informatik, @jeremygentles, @ZhengRui, @bfoujols, @jsmith0475, @pagiaddlemon, @sebbyyyywebbyyy, @royschwartz2, @vikram11, @amiable-dev, @khalidhalim, @DrJsPBs, @chishaku, @Andrea18500, @shayonpal, @rhm2k, @snorcup, @JohnBub, @obstinatelark, @jonashaefele, @vishnu2kmohan
 
-## **Copilot Plus Disclosure**
+## **Privacy**
 
-Copilot Plus is a premium product of Brevilabs LLC and it is not affiliated with Obsidian. It offers a powerful agentic AI integration into Obsidian. Please check out our website [obsidiancopilot.com](https://obsidiancopilot.com/) for more details!
+Your messages and notes are sent only to your configured LLM provider (OpenAI, Anthropic, Google, etc.).
 
-- An account and payment are required for full access.
-- Copilot Plus requires network use to facilitate the AI agent.
-- **Privacy & Data Handling**:
-  - **Free tier**: Your messages and notes are sent only to your configured LLM provider (OpenAI, Anthropic, Google, etc.). Nothing goes to Brevilabs servers.
-  - **Plus tier**: Messages go to your configured LLM provider. File conversions (PDF, DOCX, EPUB, images, etc.) are processed by Brevilabs servers only when you explicitly trigger these features via `@` commands.
-  - **Processing vs. Retention**: We process your data to deliver the feature you requested, then discard it. No message content, file uploads, or documents are retained on our servers after processing.
-  - **User ID**: A randomly generated UUID is sent with Plus API requests for service delivery (license abuse prevention, rate limiting) but is not used for user tracking, profiling, or analytics.
-- Please see the privacy policy on the website for more details.
-- The frontend code of Copilot plugin is fully open-source. However, the backend code facilitating the AI agents is close-sourced and proprietary.
-- We offer a full refund if you are not satisfied with the product within 14 days of your purchase, no questions asked.
+The frontend code of Copilot plugin is fully open-source.
 
 ## **Authors**
 
-Brevilabs Team | Email: logan@brevilabs.com | X/Twitter: [@logancyang](https://twitter.com/logancyang)
+X/Twitter: [@logancyang](https://twitter.com/logancyang)

@@ -1,5 +1,5 @@
 // __mocks__/obsidian.js
-/* eslint-disable no-undef */
+// biome-ignore-all lint: migrated from eslint suppression
 import yaml from "js-yaml";
 
 module.exports = {

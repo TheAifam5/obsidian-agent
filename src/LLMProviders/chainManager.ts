@@ -6,7 +6,7 @@ import {
   setChainType,
 } from "@/aiParams";
 import ChainFactory, { ChainType, Document } from "@/chainFactory";
-import { BUILTIN_CHAT_MODELS, DEFAULT_MAX_SOURCE_CHUNKS, USER_SENDER } from "@/constants";
+import { DEFAULT_MAX_SOURCE_CHUNKS, USER_SENDER } from "@/constants";
 import {
   AutonomousAgentChainRunner,
   ChainRunner,
@@ -137,12 +137,15 @@ export default class ChainManager {
       if (neededReInitChatMode) {
         let customModel = findCustomModel(newModelKey, getSettings().activeModels);
         if (!customModel) {
-          // Reset default model if no model is found
-          console.error("Resetting default model. No model configuration found for: ", newModelKey);
-          customModel = BUILTIN_CHAT_MODELS[0];
-          newModelKey = customModel.name + "|" + customModel.provider;
+          const fallbackModel = getSettings().activeModels.find((model) => model.enabled);
+          if (!fallbackModel) {
+            throw new MissingModelKeyError(
+              "No valid model is configured. Add a model in Settings → Copilot → Model settings."
+            );
+          }
+          customModel = fallbackModel;
+          newModelKey = `${fallbackModel.name}|${fallbackModel.provider}`;
         }
-
         // Add validation for project mode
         if (chainType === ChainType.PROJECT_CHAIN && !customModel.projectEnabled) {
           // If the model is not project-enabled, find the first project-enabled model

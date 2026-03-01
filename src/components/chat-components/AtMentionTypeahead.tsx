@@ -12,8 +12,7 @@ import { useAtMentionSearch } from "./hooks/useAtMentionSearch";
 interface AtMentionTypeaheadProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelect: (category: AtMentionCategory, data: any) => void;
-  isCopilotPlus?: boolean;
+  onSelect: (category: AtMentionCategory, data: unknown) => void;
   currentActiveFile?: TFile | null;
 }
 
@@ -30,7 +29,6 @@ export function AtMentionTypeahead({
   isOpen,
   onClose,
   onSelect,
-  isCopilotPlus = false,
   currentActiveFile = null,
 }: AtMentionTypeaheadProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,14 +40,13 @@ export function AtMentionTypeahead({
     mode: "category",
   });
 
-  const availableCategoryOptions = useAtMentionCategories(isCopilotPlus);
+  const availableCategoryOptions = useAtMentionCategories();
 
   // Get search results based on current state using unified search
   const searchResults = useAtMentionSearch(
     searchQuery,
     extendedState.mode,
     extendedState.selectedCategory,
-    isCopilotPlus,
     availableCategoryOptions,
     currentActiveFile
   );

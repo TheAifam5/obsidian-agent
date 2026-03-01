@@ -42,7 +42,6 @@ export class CopilotSettingTab extends PluginSettingTab {
       }
 
       // Reload the plugin
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const app = this.plugin.app as any;
       await app.plugins.disablePlugin("copilot");
       await app.plugins.enablePlugin("copilot");

@@ -10,22 +10,54 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
 
 ### Build & Development
 
-- **NEVER RUN `npm run dev`** - The user will handle all builds manually
-- `npm run build` - Production build (TypeScript check + minified output)
+- **NEVER RUN `bun run dev`** - The user will handle all builds manually
+- `bun run build` - Production build (TypeScript check + minified output)
 
 ### Code Quality
 
-- `npm run lint` - Run ESLint checks
-- `npm run lint:fix` - Auto-fix ESLint issues
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check formatting without changing files
-- **Before PR:** Always run `npm run format && npm run lint`
+- `bun run lint` - Run Biome lint checks
+- `bun run lint:fix` - Auto-fix Biome lint issues
+- `bun run format` - Format code with Prettier
+- `bun run format:check` - Check formatting without changing files
+- **Before PR:** Always run `bun run format && bun run lint`
 
 ### Testing
 
-- `npm run test` - Run unit tests (excludes integration tests)
-- `npm run test:integration` - Run integration tests (requires API keys)
-- Run single test: `npm test -- -t "test name"`
+- `bun run test` - Run unit tests (excludes integration tests)
+- `bun run test:integration` - Run integration tests (requires API keys)
+- Run single test: `bun test -- -t "test name"`
+
+### Obsidian CLI (Live Testing)
+
+The Obsidian desktop app includes a CLI for plugin development. Use the full path:
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/obsidian <command>
+```
+
+**Plugin reload** (after `bun run build`):
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/obsidian plugin:reload id=copilot
+```
+
+**Console debugging** (requires attaching debugger first):
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/obsidian dev:debug on
+/Applications/Obsidian.app/Contents/MacOS/obsidian dev:console limit=30
+/Applications/Obsidian.app/Contents/MacOS/obsidian dev:console level=error limit=10
+/Applications/Obsidian.app/Contents/MacOS/obsidian dev:errors
+```
+
+**Other useful dev commands**:
+
+- `dev:dom selector=<css>` — Query DOM elements
+- `dev:screenshot path=<file>` — Take a screenshot
+- `eval code=<js>` — Execute JS in the app context
+- `plugin:disable id=copilot` / `plugin:enable id=copilot`
+
+Run `obsidian help` for the full command list.
 
 ## High-Level Architecture
 
@@ -191,7 +223,15 @@ For detailed architecture diagrams and documentation, see [`MESSAGE_ARCHITECTURE
   - `logWarn()` for warnings
   - `logError()` for errors
 - Import from logger: `import { logInfo, logWarn, logError } from "@/logger"`
-- These utilities already respect the debug flag internally — never wrap them in `if (getSettings().debug)`
+
+### CSS & Styling
+
+- **NEVER edit `styles.css` directly** - This is a generated file
+- **Source file**: `src/styles/tailwind.css` - Edit this file for custom CSS
+- **Build process**: `bun run build:tailwind` compiles `src/styles/tailwind.css` → `styles.css`
+- **Tailwind classes**: Use Tailwind utility classes in components (see `tailwind.config.js` for available classes)
+- **Custom CSS**: Add custom styles to `src/styles/tailwind.css` after the `@import` statements
+- After editing CSS, always run `bun run build` to regenerate `styles.css`
 
 ## Testing Guidelines
 
@@ -200,6 +240,17 @@ For detailed architecture diagrams and documentation, see [`MESSAGE_ARCHITECTURE
 - Integration tests require API keys in `.env.test`
 - Test files adjacent to implementation (`.test.ts`)
 - Use `@testing-library/react` for component testing
+
+### Avoiding Deep Dependency Chains in Tests
+
+This codebase has deep transitive import chains (e.g. a utility → cache → searchUtils → embeddingManager → Modal). Importing any module in this chain from a test requires mocking the entire tree, which is brittle and verbose.
+
+**Rules for new code:**
+
+1. **Pass data, not services** — If a function only needs a string (like `outputFolder`), accept it as a parameter. Don't give it access to the entire settings singleton.
+2. **Singletons at the edges only** — `getSettings()`, `PDFCache.getInstance()` should only be called in top-level orchestration (constructors, main entry points). Inner functions receive what they need as parameters.
+3. **Pure logic in leaf modules** — Extract testable logic into small files with minimal imports. The orchestration file (which has heavy imports) calls the leaf function and passes in the dependencies. See `src/tools/convertedDocOutput.ts` as an example.
+4. **Litmus test before writing a function** — "Can I test this by calling it directly with plain arguments?" If the answer is no because of an import, that dependency should be a parameter instead.
 
 ## Development Session Planning
 
@@ -279,3 +330,4 @@ The TODO.md should be:
   - Non-project chats stored in default repository
   - Backwards compatible - loads existing messages from ProjectManager cache
   - Zero configuration required - works automatically
+- Check @tailwind.config.js to understand what tailwind css classnames are available

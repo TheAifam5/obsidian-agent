@@ -223,7 +223,6 @@ diff: "------- SEARCH\\n## Attendees\\n- John Smith\\n- Jane Doe\\n=======\\n## 
       displayName: "YouTube Transcription",
       description: "Get transcripts from YouTube videos",
       category: "media",
-      isPlusOnly: true,
       requiresUserMessageContent: true,
       customPromptInstructions: `For youtubeTranscription:
 - Use when user provides YouTube URLs

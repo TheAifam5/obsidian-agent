@@ -153,7 +153,7 @@ class LogFileManager {
   }
 
   /**
-   * Sanitize settings by removing only API keys and license keys.
+   * Sanitize settings by removing API keys and other sensitive values.
    * Recursively handles nested objects and arrays (e.g., CustomModel.apiKey in activeModels).
    */
   private sanitizeSettingsForLog(): Record<string, unknown> {
@@ -162,7 +162,7 @@ class LogFileManager {
   }
 
   /**
-   * Recursively clone an object/array while removing API keys and license keys.
+   * Recursively clone an object/array while removing API keys and sensitive values.
    */
   private removeKeysRecursive(value: unknown): unknown {
     if (value === null || value === undefined) {
@@ -180,12 +180,10 @@ class LogFileManager {
       const obj = value as Record<string, unknown>;
 
       for (const [key, val] of Object.entries(obj)) {
-        // Skip API keys, license keys, and infrastructure identifiers
+        // Skip API keys and infrastructure identifiers
         if (
           /apiKey$/i.test(key) ||
-          /licenseKey$/i.test(key) ||
           /_api_key$/i.test(key) ||
-          /_license_key$/i.test(key) ||
           /orgId$/i.test(key) ||
           /instanceName$/i.test(key) ||
           /deploymentName$/i.test(key) ||

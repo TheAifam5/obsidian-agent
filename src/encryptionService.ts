@@ -10,7 +10,6 @@ function getSafeStorage() {
     return safeStorageInternal;
   }
   // Dynamically import electron to access safeStorage
-  // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
   safeStorageInternal = require("electron")?.remote?.safeStorage;
   return safeStorageInternal;
 }
@@ -43,7 +42,6 @@ export async function encryptAllKeys(
   const keysToEncrypt = Object.keys(settings).filter(
     (key) =>
       key.toLowerCase().includes("apikey") ||
-      key === "plusLicenseKey" ||
       key === "githubCopilotAccessToken" ||
       key === "githubCopilotToken"
   );

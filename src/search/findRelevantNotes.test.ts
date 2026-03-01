@@ -3,8 +3,7 @@ import { getBacklinkedNotes, getLinkedNotes } from "@/noteUtils";
 import { findRelevantNotes } from "@/search/findRelevantNotes";
 import { MiyoClient } from "@/miyo/MiyoClient";
 import { getMiyoSourceId } from "@/miyo/miyoUtils";
-import { getSettings } from "@/settings/model";
-import { isSelfHostAccessValid } from "@/plusUtils";
+import { CopilotSettings, getSettings } from "@/settings/model";
 import VectorStoreManager from "@/search/vectorStoreManager";
 
 jest.mock("@/noteUtils", () => ({
@@ -51,10 +50,6 @@ jest.mock("@/miyo/miyoUtils", () => ({
   getMiyoSourceId: jest.fn(),
 }));
 
-jest.mock("@/plusUtils", () => ({
-  isSelfHostAccessValid: jest.fn(),
-}));
-
 jest.mock("@/logger", () => ({
   logInfo: jest.fn(),
   logWarn: jest.fn(),
@@ -74,9 +69,6 @@ function createMarkdownFile(path: string): TFile {
 
 describe("findRelevantNotes", () => {
   const mockedGetSettings = getSettings as jest.MockedFunction<typeof getSettings>;
-  const mockedIsSelfHostAccessValid = isSelfHostAccessValid as jest.MockedFunction<
-    typeof isSelfHostAccessValid
-  >;
   const mockedGetLinkedNotes = getLinkedNotes as jest.MockedFunction<typeof getLinkedNotes>;
   const mockedGetBacklinkedNotes = getBacklinkedNotes as jest.MockedFunction<
     typeof getBacklinkedNotes
@@ -92,15 +84,13 @@ describe("findRelevantNotes", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockedIsSelfHostAccessValid.mockReturnValue(false);
     mockedGetSettings.mockReturnValue({
       debug: false,
       selfHostUrl: "",
       enableMiyo: false,
       enableSemanticSearchV3: false,
-      selfHostModeValidatedAt: null,
-      selfHostValidationCount: 0,
-    } as any);
+      enableSelfHostMode: false,
+    } as unknown as CopilotSettings);
     mockedGetLinkedNotes.mockReturnValue([]);
     mockedGetBacklinkedNotes.mockReturnValue([]);
     mockedGetMiyoSourceId.mockReturnValue("test-source");
@@ -179,13 +169,13 @@ describe("findRelevantNotes", () => {
   });
 
   it("uses Miyo when shouldUseMiyoForRelevantNotes is true (enableMiyo=true and valid self-host)", async () => {
-    mockedIsSelfHostAccessValid.mockReturnValue(true);
     mockedGetSettings.mockReturnValue({
       debug: false,
       selfHostUrl: "http://127.0.0.1:8742",
       enableMiyo: true,
       enableSemanticSearchV3: true,
-    } as any);
+      enableSelfHostMode: true,
+    } as unknown as CopilotSettings);
     mockGetDocumentsByPath.mockResolvedValue([
       {
         id: "chunk-a",
@@ -233,7 +223,8 @@ describe("findRelevantNotes", () => {
       selfHostUrl: "http://127.0.0.1:8742",
       enableMiyo: false,
       enableSemanticSearchV3: true,
-    } as any);
+      enableSelfHostMode: false,
+    } as unknown as CopilotSettings);
     mockGetDocumentsByPath.mockResolvedValue([
       { id: "chunk-a", path: "source.md", content: "source chunk content", embedding: [] },
     ]);
@@ -255,13 +246,13 @@ describe("findRelevantNotes", () => {
   });
 
   it("falls back to link-only relevance when Miyo related-note search fails", async () => {
-    mockedIsSelfHostAccessValid.mockReturnValue(true);
     mockedGetSettings.mockReturnValue({
       debug: false,
       selfHostUrl: "http://127.0.0.1:8742",
       enableMiyo: true,
       enableSemanticSearchV3: true,
-    } as any);
+      enableSelfHostMode: true,
+    } as unknown as CopilotSettings);
     mockGetDocumentsByPath.mockResolvedValue([
       {
         id: "chunk-a",

@@ -4,7 +4,6 @@ import { updateIndexingProgressState } from "@/aiParams";
 import { CustomError } from "@/error";
 import { logInfo, logWarn } from "@/logger";
 import EmbeddingsManager from "@/LLMProviders/embeddingManager";
-import { isSelfHostAccessValid } from "@/plusUtils";
 import { CopilotSettings, getSettings, subscribeToSettingsChange } from "@/settings/model";
 import { Orama } from "@orama/orama";
 import { Notice, Platform, TFile } from "obsidian";
@@ -207,7 +206,7 @@ export default class VectorStoreManager {
    * @returns True when Miyo should be the active backend.
    */
   private shouldUseMiyo(settings: CopilotSettings): boolean {
-    return settings.enableMiyo && settings.enableSemanticSearchV3 && isSelfHostAccessValid();
+    return settings.enableMiyo && settings.enableSemanticSearchV3 && settings.enableSelfHostMode;
   }
 
   /**

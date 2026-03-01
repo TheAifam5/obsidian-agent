@@ -61,37 +61,6 @@ describe("toolExecution", () => {
       });
     });
 
-    it("should execute isPlusOnly tools without entitlement checks", async () => {
-      const plusTool = createLangChainTool({
-        name: "plusTool",
-        description: "Plus-only tool",
-        schema: z.object({}),
-        func: async () => "Plus tool executed",
-      });
-
-      ToolRegistry.getInstance().register({
-        tool: plusTool,
-        metadata: {
-          id: "plusTool",
-          displayName: "Plus Tool",
-          description: "Plus-only tool",
-          category: "custom",
-          isPlusOnly: true,
-        },
-      });
-
-      mockCallTool.mockResolvedValueOnce("Plus tool executed");
-
-      const result = await executeSequentialToolCall({ name: "plusTool", args: {} }, [plusTool]);
-
-      expect(result).toEqual({
-        toolName: "plusTool",
-        result: "Plus tool executed",
-        success: true,
-      });
-      expect(mockCallTool).toHaveBeenCalled();
-    });
-
     it("should handle tool not found", async () => {
       const result = await executeSequentialToolCall({ name: "unknownTool", args: {} }, []);
 

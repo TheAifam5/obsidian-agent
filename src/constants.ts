@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { ChainType } from "./chainFactory";
 import { PromptSortStrategy } from "./types";
 
-export const BREVILABS_API_BASE_URL = "https://api.brevilabs.com/v1";
-export const BREVILABS_MODELS_BASE_URL = "https://models.brevilabs.com/v1";
 export const CHAT_VIEWTYPE = "copilot-chat-view";
 export const USER_SENDER = "user";
 export const AI_SENDER = "ai";
@@ -132,13 +130,6 @@ export const LOADING_MESSAGES = {
   READING_FILE_TREE: "Reading file tree",
   COMPACTING: "Compacting",
 };
-export const PLUS_UTM_MEDIUMS = {
-  SETTINGS: "settings",
-  EXPIRED_MODAL: "expired_modal",
-  CHAT_MODE_SELECT: "chat_mode_select",
-  MODE_SELECT_TOOLTIP: "mode_select_tooltip",
-};
-export type PlusUtmMedium = (typeof PLUS_UTM_MEDIUMS)[keyof typeof PLUS_UTM_MEDIUMS];
 
 /**
  * Reasoning effort levels for OpenAI reasoning models
@@ -168,7 +159,6 @@ export const DEFAULT_MODEL_SETTING = {
 } as const;
 
 export enum ChatModels {
-  COPILOT_PLUS_FLASH = "copilot-plus-flash",
   GPT_5_2 = "gpt-5.2",
   GPT_5_mini = "gpt-5-mini",
   GPT_5_nano = "gpt-5-nano",
@@ -213,7 +203,6 @@ export enum ChatModelProviders {
   GROQ = "groq",
   OLLAMA = "ollama",
   LM_STUDIO = "lm-studio",
-  COPILOT_PLUS = "copilot-plus",
   MISTRAL = "mistralai",
   DEEPSEEK = "deepseek",
   COHEREAI = "cohereai",
@@ -234,16 +223,6 @@ export const MODEL_CAPABILITIES: Record<ModelCapability, string> = {
 };
 
 export const BUILTIN_CHAT_MODELS: CustomModel[] = [
-  {
-    name: ChatModels.COPILOT_PLUS_FLASH,
-    provider: ChatModelProviders.COPILOT_PLUS,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    plusExclusive: true,
-    projectEnabled: false,
-    capabilities: [ModelCapability.VISION],
-  },
   {
     name: ChatModels.OPENROUTER_GEMINI_3_FLASH_PREVIEW,
     provider: ChatModelProviders.OPENROUTERAI,
@@ -435,8 +414,6 @@ export enum EmbeddingModelProviders {
   OLLAMA = "ollama",
   LM_STUDIO = "lm-studio",
   OPENAI_FORMAT = "3rd party (openai-format)",
-  COPILOT_PLUS = "copilot-plus",
-  COPILOT_PLUS_JINA = "copilot-plus-jina",
   SILICONFLOW = "siliconflow",
 }
 
@@ -448,44 +425,11 @@ export enum EmbeddingModels {
   COHEREAI_EMBED_MULTILINGUAL_LIGHT_V3_0 = "embed-multilingual-light-v3.0",
   GOOGLE_ENG = "text-embedding-004",
   GOOGLE_GEMINI_EMBEDDING = "gemini-embedding-001",
-  COPILOT_PLUS_SMALL = "copilot-plus-small",
-  COPILOT_PLUS_LARGE = "copilot-plus-large",
-  COPILOT_PLUS_MULTILINGUAL = "copilot-plus-multilingual",
   SILICONFLOW_QWEN3_EMBEDDING_0_6B = "Qwen/Qwen3-Embedding-0.6B",
   OPENROUTER_OPENAI_EMBEDDING_SMALL = "openai/text-embedding-3-small",
 }
 
 export const BUILTIN_EMBEDDING_MODELS: CustomModel[] = [
-  {
-    name: EmbeddingModels.COPILOT_PLUS_SMALL,
-    provider: EmbeddingModelProviders.COPILOT_PLUS,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-  },
-  {
-    name: EmbeddingModels.COPILOT_PLUS_LARGE,
-    provider: EmbeddingModelProviders.COPILOT_PLUS_JINA,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-    believerExclusive: true,
-    dimensions: 1024,
-  },
-  {
-    name: EmbeddingModels.COPILOT_PLUS_MULTILINGUAL,
-    provider: EmbeddingModelProviders.COPILOT_PLUS_JINA,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-    dimensions: 512,
-  },
   {
     name: EmbeddingModels.OPENROUTER_OPENAI_EMBEDDING_SMALL,
     provider: EmbeddingModelProviders.OPENROUTERAI,
@@ -660,17 +604,17 @@ export const ProviderInfo: Record<Provider, ProviderMetadata> = {
   },
   [ChatModelProviders.LM_STUDIO]: {
     label: "LM Studio",
-    host: "http://localhost:1234/v1",
-    curlBaseURL: "http://localhost:1234/v1",
+    host: "http://localhost:4000/v1",
+    curlBaseURL: "http://localhost:4000/v1",
     keyManagementURL: "",
-    listModelURL: "",
+    listModelURL: "http://localhost:4000/v1/models",
   },
   [ChatModelProviders.OPENAI_FORMAT]: {
     label: "OpenAI Format",
-    host: "https://api.example.com/v1",
-    curlBaseURL: "https://api.example.com/v1",
+    host: "http://localhost:4000/v1",
+    curlBaseURL: "http://localhost:4000/v1",
     keyManagementURL: "",
-    listModelURL: "",
+    listModelURL: "http://localhost:4000/v1/models",
   },
   [ChatModelProviders.MISTRAL]: {
     label: "Mistral",
@@ -695,20 +639,6 @@ export const ProviderInfo: Record<Provider, ProviderMetadata> = {
     keyManagementURL: "https://console.aws.amazon.com/iam/home#/security_credentials",
     listModelURL: "",
   },
-  [EmbeddingModelProviders.COPILOT_PLUS]: {
-    label: "Copilot Plus",
-    host: BREVILABS_MODELS_BASE_URL,
-    curlBaseURL: BREVILABS_MODELS_BASE_URL,
-    keyManagementURL: "",
-    listModelURL: "",
-  },
-  [EmbeddingModelProviders.COPILOT_PLUS_JINA]: {
-    label: "Copilot Plus",
-    host: BREVILABS_MODELS_BASE_URL,
-    curlBaseURL: BREVILABS_MODELS_BASE_URL,
-    keyManagementURL: "",
-    listModelURL: "",
-  },
   [ChatModelProviders.GITHUB_COPILOT]: {
     label: "GitHub Copilot",
     host: "https://api.githubcopilot.com",
@@ -728,7 +658,6 @@ export const ProviderSettingsKeyMap: Record<SettingKeyProviders, keyof CopilotSe
   openrouterai: "openRouterAiApiKey",
   cohereai: "cohereApiKey",
   xai: "xaiApiKey",
-  "copilot-plus": "plusLicenseKey",
   mistralai: "mistralApiKey",
   deepseek: "deepseekApiKey",
   "amazon-bedrock": "amazonBedrockApiKey",
@@ -811,25 +740,14 @@ export const COMMAND_NAMES: Record<CommandId, string> = {
   [COMMAND_IDS.APPLY_CUSTOM_COMMAND]: "Apply custom command",
   [COMMAND_IDS.OPEN_LOG_FILE]: "Create log file",
   [COMMAND_IDS.CLEAR_LOG_FILE]: "Clear log file",
-  [COMMAND_IDS.DOWNLOAD_YOUTUBE_SCRIPT]: "Download YouTube Script (plus)",
+  [COMMAND_IDS.DOWNLOAD_YOUTUBE_SCRIPT]: "Download YouTube Script",
   [COMMAND_IDS.TRIGGER_QUICK_ASK]: "Quick Ask",
 };
 
 export type CommandId = (typeof COMMAND_IDS)[keyof typeof COMMAND_IDS];
 
-export const RESTRICTION_MESSAGES = {
-  NON_MARKDOWN_FILES_RESTRICTED:
-    "Non-markdown files are only available in Copilot Plus mode. Please upgrade to access this file type.",
-  URL_PROCESSING_RESTRICTED:
-    "URL processing is only available in Copilot Plus mode. URLs will not be processed for context.",
-  UNSUPPORTED_FILE_TYPE: (extension: string) =>
-    `${extension.toUpperCase()} files are not supported in the current mode.`,
-} as const;
-
 export const DEFAULT_SETTINGS: CopilotSettings = {
   userId: uuidv4(),
-  isPlusUser: false,
-  plusLicenseKey: "",
   openAIApiKey: "",
   openAIOrgId: "",
   huggingfaceApiKey: "",
@@ -853,9 +771,9 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   githubCopilotToken: "",
   githubCopilotTokenExpiresAt: 0,
   defaultChainType: ChainType.LLM_CHAIN,
-  defaultModelKey: ChatModels.OPENROUTER_GEMINI_2_5_FLASH + "|" + ChatModelProviders.OPENROUTERAI,
+  defaultModelKey: ChatModels.GPT_41 + "|" + ChatModelProviders.OPENAI_FORMAT,
   embeddingModelKey:
-    EmbeddingModels.OPENROUTER_OPENAI_EMBEDDING_SMALL + "|" + EmbeddingModelProviders.OPENROUTERAI,
+    EmbeddingModels.OPENAI_EMBEDDING_SMALL + "|" + EmbeddingModelProviders.OPENAI_FORMAT,
   temperature: DEFAULT_MODEL_SETTING.TEMPERATURE,
   maxTokens: DEFAULT_MODEL_SETTING.MAX_TOKENS,
   contextTurns: 15,
@@ -882,8 +800,27 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   maxSourceChunks: DEFAULT_MAX_SOURCE_CHUNKS,
   enableInlineCitations: true,
   groqApiKey: "",
-  activeModels: BUILTIN_CHAT_MODELS,
-  activeEmbeddingModels: BUILTIN_EMBEDDING_MODELS,
+  activeModels: [
+    {
+      name: ChatModels.GPT_41,
+      provider: ChatModelProviders.OPENAI_FORMAT,
+      enabled: true,
+      isBuiltIn: false,
+      stream: true,
+      projectEnabled: true,
+      baseUrl: "http://localhost:4000/v1",
+    },
+  ],
+  activeEmbeddingModels: [
+    {
+      name: EmbeddingModels.OPENAI_EMBEDDING_SMALL,
+      provider: EmbeddingModelProviders.OPENAI_FORMAT,
+      enabled: true,
+      isBuiltIn: false,
+      isEmbeddingModel: true,
+      baseUrl: "http://localhost:4000/v1",
+    },
+  ],
   embeddingRequestsPerMin: 60,
   embeddingBatchSize: 16,
   disableIndexOnMobile: true,
@@ -906,8 +843,6 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   enableSemanticSearchV3: false,
   enableSelfHostMode: false,
   enableMiyo: false,
-  selfHostModeValidatedAt: null,
-  selfHostValidationCount: 0,
   selfHostUrl: "",
   selfHostApiKey: "",
   selfHostSearchProvider: "firecrawl",

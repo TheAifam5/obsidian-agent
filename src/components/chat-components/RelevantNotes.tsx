@@ -29,28 +29,14 @@ import {
 import { Notice, TFile } from "obsidian";
 import React, { memo, useCallback, useEffect, useState } from "react";
 
-const SELF_HOST_GRACE_PERIOD_MS = 15 * 24 * 60 * 60 * 1000;
-
 /**
  * Return true when Miyo-backed semantic index is expected to be active.
  *
  * @param settings - Current Copilot settings object.
- * @returns True when Miyo mode and self-host validation are active.
+ * @returns True when Miyo mode and self-host mode are enabled.
  */
 function shouldUseMiyoIndex(settings: CopilotSettings): boolean {
-  if (!settings.enableMiyo || !settings.enableSemanticSearchV3) {
-    return false;
-  }
-
-  if (settings.selfHostModeValidatedAt == null) {
-    return false;
-  }
-
-  if ((settings.selfHostValidationCount ?? 0) >= 3) {
-    return true;
-  }
-
-  return Date.now() - settings.selfHostModeValidatedAt < SELF_HOST_GRACE_PERIOD_MS;
+  return settings.enableMiyo && settings.enableSemanticSearchV3 && settings.enableSelfHostMode;
 }
 
 function useRelevantNotes(refresher: number) {

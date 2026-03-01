@@ -1,4 +1,3 @@
-import { BrevilabsClient } from "@/LLMProviders/brevilabsClient";
 import ProjectManager from "@/LLMProviders/projectManager";
 import {
   CustomModel,
@@ -25,7 +24,6 @@ import { logInfo, logWarn } from "@/logger";
 import { logFileManager } from "@/logFileManager";
 import { UserMemoryManager } from "@/memory/UserMemoryManager";
 import { clearRecordedPromptPayload } from "@/LLMProviders/chainRunner/utils/promptPayloadRecorder";
-import { checkIsPlusUser, refreshSelfHostModeValidation } from "@/plusUtils";
 import {
   getWebViewerService,
   startActiveWebTabTracking,
@@ -75,7 +73,6 @@ import { v4 as uuidv4 } from "uuid";
 export default class CopilotPlugin extends Plugin {
   // Plugin components
   projectManager: ProjectManager;
-  brevilabsClient: BrevilabsClient;
   userMessageHistory: string[] = [];
   vectorStoreManager: VectorStoreManager;
   fileParserManager: FileParserManager;
@@ -109,12 +106,6 @@ export default class CopilotPlugin extends Plugin {
     // Initialize built-in tools with vault access
     initializeBuiltinTools(this.app.vault);
 
-    // Initialize BrevilabsClient
-    this.brevilabsClient = BrevilabsClient.getInstance();
-    this.brevilabsClient.setPluginVersion(this.manifest.version);
-    checkIsPlusUser();
-    refreshSelfHostModeValidation();
-
     // Initialize ProjectManager
     this.projectManager = ProjectManager.getInstance(this.app, this);
 
@@ -127,7 +118,7 @@ export default class CopilotPlugin extends Plugin {
     vaultDataManager.initialize();
 
     // Initialize FileParserManager early with other core services
-    this.fileParserManager = new FileParserManager(this.brevilabsClient, this.app.vault);
+    this.fileParserManager = new FileParserManager(this.app.vault);
 
     // Initialize ChatUIState with new architecture
     const messageRepo = new MessageRepository();

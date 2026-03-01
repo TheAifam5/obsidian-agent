@@ -1,4 +1,4 @@
-import { Pdf4llmResponse } from "@/LLMProviders/brevilabsClient";
+import { Pdf4llmResponse } from "@/types/serviceResponses";
 import { logError, logInfo } from "@/logger";
 import { MD5 } from "crypto-js";
 import { TFile } from "obsidian";

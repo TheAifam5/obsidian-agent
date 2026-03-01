@@ -360,7 +360,6 @@ export class ChatManager {
       // Clear any existing isActive flags to ensure only one active tab
       const clearedTabs: WebTabContext[] = sanitizedTabs.map((tab) => {
         if (tab.isActive) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { isActive: _unused, ...rest } = tab;
           return rest;
         }

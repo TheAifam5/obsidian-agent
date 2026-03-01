@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { SettingSwitch } from "@/components/ui/setting-switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { PLUS_UTM_MEDIUMS } from "@/constants";
-import { navigateToPlusPage, useIsPlusUser } from "@/plusUtils";
 import { logError } from "@/logger";
 import { updateSetting, useSettingsValue } from "@/settings/model";
 import { Docs4LLMParser } from "@/tools/FileParserManager";
@@ -25,7 +23,6 @@ import {
   MoreHorizontal,
   RefreshCw,
   Sparkles,
-  SquareArrowOutUpRight,
 } from "lucide-react";
 import { Notice } from "obsidian";
 import React from "react";
@@ -199,7 +196,6 @@ export function ChatControls({
 }: ChatControlsProps) {
   const settings = useSettingsValue();
   const [selectedChain, setSelectedChain] = useChainType();
-  const isPlusUser = useIsPlusUser();
 
   const handleModeChange = async (chainType: ChainType) => {
     // If leaving project mode with autosave enabled, save chat BEFORE clearing project context
@@ -224,14 +220,9 @@ export function ChatControls({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost2" size="fit" className="tw-ml-1 tw-text-sm tw-text-muted">
-              {selectedChain === ChainType.LLM_CHAIN && "chat (free)"}
-              {selectedChain === ChainType.VAULT_QA_CHAIN && "vault QA (free)"}
-              {selectedChain === ChainType.COPILOT_PLUS_CHAIN && (
-                <div className="tw-flex tw-items-center tw-gap-1">
-                  <Sparkles className="tw-size-4" />
-                  copilot plus
-                </div>
-              )}
+              {selectedChain === ChainType.LLM_CHAIN && "chat"}
+              {selectedChain === ChainType.VAULT_QA_CHAIN && "vault QA"}
+              {selectedChain === ChainType.COPILOT_PLUS_CHAIN && "agent"}
               {selectedChain === ChainType.PROJECT_CHAIN && "projects (alpha)"}
               <ChevronDown className="tw-mt-0.5 tw-size-5" />
             </Button>
@@ -242,47 +233,31 @@ export function ChatControls({
                 handleModeChange(ChainType.LLM_CHAIN);
               }}
             >
-              chat (free)
+              chat
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() => {
                 handleModeChange(ChainType.VAULT_QA_CHAIN);
               }}
             >
-              vault QA (free)
+              vault QA
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() => {
                 handleModeChange(ChainType.COPILOT_PLUS_CHAIN);
               }}
             >
-              <div className="tw-flex tw-items-center tw-gap-1">
-                <Sparkles className="tw-size-4" />
-                copilot plus
-              </div>
+              agent
             </DropdownMenuItem>
-
-            {isPlusUser ? (
-              <DropdownMenuItem
-                className="tw-flex tw-items-center tw-gap-1"
-                onSelect={() => {
-                  handleModeChange(ChainType.PROJECT_CHAIN);
-                }}
-              >
-                <LibraryBig className="tw-size-4" />
-                projects (alpha)
-              </DropdownMenuItem>
-            ) : (
-              <DropdownMenuItem
-                onSelect={() => {
-                  navigateToPlusPage(PLUS_UTM_MEDIUMS.CHAT_MODE_SELECT);
-                  onCloseProject?.();
-                }}
-              >
-                copilot plus
-                <SquareArrowOutUpRight className="tw-size-3" />
-              </DropdownMenuItem>
-            )}
+            <DropdownMenuItem
+              className="tw-flex tw-items-center tw-gap-1"
+              onSelect={() => {
+                handleModeChange(ChainType.PROJECT_CHAIN);
+              }}
+            >
+              <LibraryBig className="tw-size-4" />
+              projects (alpha)
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

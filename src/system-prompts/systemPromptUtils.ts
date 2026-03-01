@@ -39,7 +39,7 @@ export function validatePromptName(
     return null; // No change needed
   }
 
-  // eslint-disable-next-line no-control-regex
+  // biome-ignore lint/suspicious/noControlCharactersInRegex: migrated from eslint suppression
   const invalidChars = /[#<>:"/\\|?*[\]^\x00-\x1F]/g;
   if (invalidChars.test(trimmedName)) {
     return 'Prompt name contains invalid characters. Avoid using: < > : " / \\ | ? * [ ] ^';
